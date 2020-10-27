@@ -4,7 +4,6 @@ import typing as tp
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
-
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
     >>> encrypt_caesar("python")
@@ -15,14 +14,27 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    for i in plaintext:
+        if 97 <= ord(i) <= 122:
+            if ord(i) + shift > 122:
+                ciphertext += chr(ord(i) + shift - 26)
+            else:
+                ciphertext += chr(ord(i) + shift)
+        elif 65 <= ord(i) <= 90:
+            if ord(i) + shift > 90:
+                ciphertext += chr(ord(i) + shift - 26)
+            else:
+                ciphertext += chr(ord(i) + shift)
+        else:
+            ciphertext += str(i)
+    ciphertext += ""
+
     return ciphertext
 
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     Decrypts a ciphertext using a Caesar cipher.
-
     >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
     >>> decrypt_caesar("sbwkrq")
@@ -33,7 +45,20 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    for i in ciphertext:
+        if 65 <= ord(i) <= 90:
+            if ord(i) - shift < 65:
+                plaintext += chr(ord(i) - shift + 26)
+            else:
+                plaintext += chr(ord(i) - shift)
+        elif 97 <= ord(i) <= 122:
+            if ord(i) - shift < 97:
+                plaintext += chr(ord(i) - shift + 26)
+            else:
+                plaintext += chr(ord(i) - shift)
+        else:
+            plaintext += str(i)
+    plaintext += ""
     return plaintext
 
 
